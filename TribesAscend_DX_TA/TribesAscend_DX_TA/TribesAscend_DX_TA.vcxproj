@@ -162,10 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\FullJumpHook3.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\FullJumpHook3.cpp" />
     <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\Hook.cpp" />
     <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\JumpHook.cpp" />
     <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\Memory.cpp" />
@@ -183,6 +180,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="DX.cpp" />
+    <ClCompile Include="DXCanvas.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="G:\imgui-1.69\examples\imgui_impl_dx9.cpp" />
     <ClCompile Include="G:\imgui-1.69\examples\imgui_impl_win32.cpp" />
     <ClCompile Include="G:\imgui-1.69\imgui.cpp" />
@@ -216,6 +216,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="DX.h" />
+    <ClInclude Include="DXCanvas.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="G:\imgui-1.69\examples\imgui_impl_dx9.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

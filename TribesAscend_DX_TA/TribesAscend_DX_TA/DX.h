@@ -30,6 +30,8 @@ namespace DX {
 
 	extern VMTHook* setTextureVMTHook;
 
+	extern FullJumpHook* presentFullJumpHook;
+
 	/*
 		Typedefs for callbacks
 	*/
@@ -65,7 +67,7 @@ namespace DX {
 
 	//Global
 	void initHooks(void);
-
+	void getResolution(void);
 	//Functions
 	void toggleDraw(void);
 }

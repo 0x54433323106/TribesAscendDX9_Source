@@ -69,9 +69,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\FullJumpHook3.cpp">
-      <Filter>Resource Files\Hookerino</Filter>
-    </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Header Files\DX</Filter>
     </ClCompile>
@@ -92,6 +89,12 @@
     </ClCompile>
     <ClCompile Include="G:\imgui-1.69\examples\imgui_impl_dx9.cpp">
       <Filter>Resource Files\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="DXCanvas.cpp">
+      <Filter>Source Files\DX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\FullJumpHook3.cpp">
+      <Filter>Resource Files\Hookerino</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +298,9 @@
     </ClInclude>
     <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\XAudio2_structs.h">
       <Filter>Header Files\SDK</Filter>
+    </ClInclude>
+    <ClInclude Include="DXCanvas.h">
+      <Filter>Header Files\DX</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

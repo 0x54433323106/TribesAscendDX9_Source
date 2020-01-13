@@ -1,15 +1,19 @@
-﻿#include <windows.h>
-#pragma comment(lib,"winmm.lib")
+﻿#define VERSION 1.0.2
 
 #include <string>
 #include <iostream>
 
-#include <ctime>
+//#include <ctime>
 #include "DX.h"
 //#include "Memory.h"
 
 #define USE_QUERY_TIMER
+
 //#define USE_TIMEGETTIME_TIMER
+#ifdef USE_TIMEGETTIME_TIMER
+#include <windows.h>
+#pragma comment(lib,"winmm.lib")
+#endif
 
 #define USE_IMGUI
 #ifdef USE_IMGUI
@@ -19,17 +23,9 @@
 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 #endif
 
-/*
-//#define USE_UEUTILITIES
-#ifdef USE_UEUTILITIES
-#include "Keys.h"
-using namespace UE_Utilities;
-#endif
-*/
-
 #define TEXTURE_STAGES 8
 
-#define DEV
+//#define DEV
 #define RDEV
 #define CONSOLE
 //#define DANGER
@@ -48,11 +44,18 @@ using namespace UE_Utilities;
 using namespace std;
 
 #ifdef RDEV
-bool b_developer = false;
+bool b_developer = true;
 #endif
 
+//#define USE_DXCANVAS
+#ifdef USE_DXCANVAS
+#include "DXCanvas.h"
+#endif
+
+//#define USE_PRESENT_MID_HOOK
+
 namespace DX {
-	IDirect3DBaseTexture9* setTextureTexture[TEXTURE_STAGES] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
+	IDirect3DBaseTexture9* setTextureTexture[TEXTURE_STAGES] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL };
 	int i_textureStages = 0, i_textureStagesPrev = 0;
 
 	LPDIRECT3DTEXTURE9 transparentTexture = NULL;
@@ -66,7 +69,7 @@ namespace DX {
 	bool b_minimalLODTextures_DIP = false;
 	bool b_minimalLODTextures_ST = false;
 	//bool b_minimalLODTexturesStages_DIP[TEXTURE_STAGES] = { true, true, true, true, true, true, true, true };
-	bool b_minimalLODTexturesStages_DIP[TEXTURE_STAGES] = { true, true, true, true, false, true, true, true };
+	bool b_minimalLODTexturesStages_DIP[TEXTURE_STAGES] = { true, true, true, true, true, true, true, true };
 	int i_LODTexturesStages_DIP[TEXTURE_STAGES] = { -1, -1, -1, -1, -1, -1, -1, -1 };
 	int i_LODTexturesStages_ST[TEXTURE_STAGES] = { -1, -1, -1, -1, -1, -1, -1, -1 };
 
@@ -93,9 +96,13 @@ namespace DX {
 	LARGE_INTEGER li_previousFrameTime;
 	DWORD i_currentTIme = 0;
 	DWORD i_prevTime = 0;
+
+	int i_resx = 0;
+	int i_resy = 0;
 }
 
 namespace DX {
+	//void updateCanvas(void);
 	/*
 	void toggleDraw(void) {
 		b_draw = !b_draw;
@@ -122,6 +129,8 @@ namespace DX {
 
 	VMTHook* setTextureVMTHook = NULL;
 
+	FullJumpHook* presentFullJumpHook = NULL;
+
 	bool hook(void) {
 
 #ifdef CONSOLE
@@ -139,8 +148,9 @@ namespace DX {
 
 		//QueryPerformanceCounter(&li_previousFrameTime);
 		li_previousFrameTime.QuadPart = 0;
+#ifdef USE_TIMEGETTIME_TIMER
 		timeBeginPeriod(0);
-
+#endif
 		return res;
 	}
 
@@ -189,6 +199,10 @@ namespace DX {
 
 		D3DXCreateTextureFromFile(device, L"transparent.png", &transparentTexture);
 
+		getResolution();
+#ifdef USE_DXCANVAS
+		DX::Objects::f_defaultFont.create();
+#endif
 		HRESULT res = ((endScene)endSceneJumpHook->getHookAddress())(device);
 		return res;
 	}
@@ -207,11 +221,7 @@ namespace DX {
 	}
 
 	HRESULT __stdcall endSceneHook(LPDIRECT3DDEVICE9 device) {
-		/*
-		#ifdef USE_UEUTILITIES
-				keyManager.checkKeyStates();
-		#endif
-		*/
+
 		if (b_resetLOD) {
 			frameCount = (frameCount + 1) % 3;
 			if (frameCount == 0) {
@@ -229,21 +239,10 @@ namespace DX {
 		//b_minimalLODTextures_DIP = false;
 
 #ifdef USE_IMGUI
+#ifndef USE_PRESENT_MID_HOOK
 		ImGui_render();
 #endif
-
-		// So calling font->DrawText for some reason resets
-		// the VMT of the device, so we need to rehook endScene
-		// Because the VMT is not reset by us, then hooked -> true
-		// so we need to disable the hooked check, or set hooked
-		// to false after font->DrawText
-		endSceneVMTHook->hook();
-		drawIndexedPrimitiveVMTHook->hook();
-		drawPrimitiveVMTHook->hook();
-		drawIndexedPrimitiveUPVMTHook->hook();
-		resetVMTHook->hook();
-		setTextureVMTHook->hook();
-		HRESULT res = ((endScene)endSceneVMTHook->getOriginalFunction())(device);
+#endif
 
 		static unsigned long long currentTime = GetTickCount64();
 		static LARGE_INTEGER QPF;
@@ -258,7 +257,7 @@ namespace DX {
 			QueryPerformanceCounter(&QPC);
 			unsigned long long deltaCounter = QPC.QuadPart - li_previousFrameTime.QuadPart;
 			timeElapsedTick = deltaCounter / (QPF.QuadPart * 1.0);// *1000;
-			while (timeElapsedTick < (d_fpsDelay/1000)) {
+			while (timeElapsedTick < (d_fpsDelay / 1000)) {
 				//Sleep(1);
 				QueryPerformanceCounter(&QPC);
 				deltaCounter = QPC.QuadPart - li_previousFrameTime.QuadPart;
@@ -282,7 +281,34 @@ namespace DX {
 		}
 #endif
 
+#ifdef USE_DXCANVAS
+		if (DXCanvas.isReady()) {
+			DXCanvas.begin();
+			DXCanvas.setFont(&DX::Objects::f_defaultFont);
+			DXCanvas.setPos(0, 0);
+			DXCanvas.setColor(255, 255, 255, 255);
+			DXCanvas.drawText(L"TribesAscend_DX_TA_V1.0.1", 0, 0);
+			//DXCanvas.setType(Drawable::Type9);
+			DXCanvas.end();
+		}
+#ifndef USE_PRESENT_MID_HOOK
+		updateCanvas();
+#endif
+#endif
 
+		// So calling font->DrawText for some reason resets
+		// the VMT of the device, so we need to rehook endScene
+		// Because the VMT is not reset by us, then hooked -> true
+		// so we need to disable the hooked check, or set hooked
+		// to false after font->DrawText
+		beginSceneVMTHook->hook();
+		endSceneVMTHook->hook();
+		drawIndexedPrimitiveVMTHook->hook();
+		drawPrimitiveVMTHook->hook();
+		drawIndexedPrimitiveUPVMTHook->hook();
+		resetVMTHook->hook();
+		setTextureVMTHook->hook();
+		HRESULT res = ((endScene)endSceneVMTHook->getOriginalFunction())(device);
 
 		return res;
 	}
@@ -296,7 +322,25 @@ namespace DX {
 		ImGui_ImplDX9_InvalidateDeviceObjects();
 #endif
 
+#ifdef USE_DXCANVAS
+		if (DX::Objects::f_defaultFont.getFont()) {
+			DX::Objects::f_defaultFont.getFont()->OnLostDevice();
+		}
+#endif
+
 		HRESULT res = ((reset)resetVMTHook->getOriginalFunction())(device, pPresentationParameters);
+#ifdef USE_DXCANVAS
+		if (DX::Objects::f_defaultFont.getFont()) {
+			DX::Objects::f_defaultFont.getFont()->OnResetDevice();
+			DX::Objects::f_defaultFont.getFont()->Release();
+			DX::Objects::f_defaultFont.created = false;
+			DX::Objects::f_defaultFont.font = NULL;
+			DX::Objects::f_defaultFont.create();
+			getResolution();
+			DXCanvas.initialise();
+			DXCanvas.clear();
+		}
+#endif
 
 #ifdef USE_IMGUI
 		ImGui_ImplDX9_CreateDeviceObjects();
@@ -324,7 +368,7 @@ namespace DX {
 			b_isSnipingFlag = true;
 		}
 
-		if (b_resetLOD) {
+		if (b_resetLOD && false) {
 			for (int i = 0; i <= TEXTURE_STAGES; i++) {
 				IDirect3DBaseTexture9* pTexture;
 				bool b = device->GetTexture(i, &pTexture) == D3D_OK;
@@ -339,7 +383,7 @@ namespace DX {
 
 		//i_textureStages /*TEXTURE_STAGES*/
 		if (b_minimalLODTextures_DIP && NumVertices >= i_LODstart && NumVertices <= i_LODend) {
-			for (int i = 0; i < i_textureStages; i++) {
+			for (int i = 0; i < /*i_textureStages*/ TEXTURE_STAGES; i++) {
 				if (!b_minimalLODTexturesStages_DIP[i])
 					continue;
 
@@ -440,6 +484,15 @@ namespace DX {
 		cout << "setTextureHook: Stage = " << Stage << endl;
 #endif
 
+		if (b_resetLOD) {
+			if (pTexture)
+				pTexture->SetLOD(0);
+			i_textureStages = 0;
+			i_textureStagesPrev = 0;
+			res = ((setTexture)(setTextureVMTHook->getOriginalFunction()))(device, Stage, pTexture);
+			return res;
+		}
+
 		if (Stage <= i_textureStagesPrev && Stage < TEXTURE_STAGES) {
 			i_textureStages = i_textureStagesPrev;
 		}
@@ -482,11 +535,33 @@ namespace DX {
 			}
 		}
 
-
 		res = ((setTexture)(setTextureVMTHook->getOriginalFunction()))(device, Stage, pTexture);
 		return res;
 	}
 
+	void getResolution(void) {
+		D3DDEVICE_CREATION_PARAMETERS cparams;
+		RECT rect;
+
+		mainDevice->GetCreationParameters(&cparams);
+		GetClientRect(cparams.hFocusWindow, &rect);
+
+		i_resx = rect.right - rect.left;
+		i_resy = rect.bottom - rect.top;
+
+		//hud_pos = { i_resx / 2 , 4 * i_resy / 5 };
+	}
+
+
+#ifdef USE_PRESENT_MID_HOOK
+	void __stdcall presentHook(LPDIRECT3DDEVICE9 device, const RECT* pSourceRect, const RECT* pDestRect, HWND hDestWindowOverride, const RGNDATA* pDirtyRegion) {
+#ifdef USE_DXCANVAS
+		updateCanvas();
+#endif
+		ImGui_render();
+		endSceneVMTHook->hook();
+	}
+#endif
 
 	void initHooks(void) {
 		beginSceneVMTHook = new VMTHook(mainDevice, 41, (DWORD)beginSceneHook, pre);
@@ -496,6 +571,10 @@ namespace DX {
 		drawPrimitiveVMTHook = new VMTHook(mainDevice, 81, (DWORD)drawPrimitiveHook, pre);
 		drawIndexedPrimitiveUPVMTHook = new VMTHook(mainDevice, 84, (DWORD)drawIndexedPrimitiveUPHook, pre);
 		setTextureVMTHook = new VMTHook(mainDevice, 65, (DWORD)setTextureHook, pre);
+#ifdef USE_PRESENT_MID_HOOK
+		DWORD addr = JumpHook::firstNonJMPInstruction(VMTHook::getFunctionInstruction(mainDevice, 17));
+		presentFullJumpHook = new FullJumpHook(addr, 0x26, 0x2d, (DWORD)presentHook, 5);
+#endif
 	}
 }
 
@@ -531,7 +610,7 @@ namespace DX {
 				static float f = 0.0f;
 				static int counter = 0;
 
-				ImGui::Begin("TribesAscend_DX_TA V1.0.1");
+				ImGui::Begin("TribesAscend_DX_TA V1.0.2");
 
 				ImGui::BeginTabBar("TabBar", tab_bar_flags);
 				{
@@ -587,12 +666,12 @@ namespace DX {
 										if (stageChanged) {
 											b_resetLODflag = true;
 										}
-									}
-								}
+					}
+				}
 #endif
-							}
+			}
 #endif
-							if (ImGui::CollapsingHeader("DIP+ST method")) {
+							if (/*ImGui::CollapsingHeader("DIP+ST method")*/ true) {
 								if (ImGui::Checkbox("Enable##DIPST", &b_minimalLODTextures_DIP)) {
 									if (!b_minimalLODTextures_DIP) {
 										b_resetLODflag = true;
@@ -601,14 +680,14 @@ namespace DX {
 #ifdef RDEV
 								if (b_developer) {
 									static bool customizeStages = false;
-									if (ImGui::Checkbox("Edit stages##DIPST", &customizeStages)) {
+									if (/*ImGui::Checkbox("Edit stages##DIPST", &customizeStages)*/ false) {
 										if (!customizeStages) {
 											for (int i = 0; i < TEXTURE_STAGES; i++) {
 												i_LODTexturesStages_DIP[i] = -1;
 											}
 										}
 									}
-									if (customizeStages) {
+									if (customizeStages || true) {
 										bool stageChanged = false;
 										for (int i = 0; i < TEXTURE_STAGES; i++) {
 											string s = to_string(i);
@@ -677,7 +756,7 @@ namespace DX {
 									}
 								}
 								*/
-							}
+										}
 
 							//ImGui::Separator();
 							//ImGui::Checkbox("Preserve chain bullets (not squares)", &b_preserveChainBullets);
@@ -704,10 +783,10 @@ namespace DX {
 							}
 							*/
 #endif
-						}
+									}
 
 						ImGui::EndTabItem();
-					}
+								}
 
 					if (ImGui::BeginTabItem("Themes")) {
 						static int style_idx = 1;
@@ -728,9 +807,9 @@ namespace DX {
 					}
 
 					ImGui::EndTabBar();
-				}
+							}
 				ImGui::End();
-			}
+		}
 
 			ImGui::EndFrame();
 
@@ -742,8 +821,8 @@ namespace DX {
 
 			ImGui::Render();
 			ImGui_ImplDX9_RenderDrawData(ImGui::GetDrawData());
-		}
 	}
+}
 
 
 }
@@ -782,10 +861,10 @@ namespace DX {
 	}
 
 	void printStartMessage(void) {
-		P("Tribes Ascend DirectX Modding V1.0.1");
+		P("Tribes Ascend DirectX Modding V1.0.2");
 		P("--------------------------------------");
-		P("* Calling device->GetTexture in DrawIndexedPrimitive causes the Tribes process to hang in the xaudio2_7.dll module when the device is resetting (ALT+TAB)."
-			" This can also occur in the setTexture hook function.");
+		//P("* Calling device->GetTexture in DrawIndexedPrimitive causes the Tribes process to hang in the xaudio2_7.dll module when the device is resetting (ALT+TAB)."
+			//" This can also occur in the setTexture hook function.");
 		P("In the event Tribes hangs, kill this console window.");
 	}
 }
