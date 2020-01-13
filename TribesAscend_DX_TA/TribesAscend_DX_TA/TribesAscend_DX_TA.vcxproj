@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{E0BAD49C-72CA-43BB-940F-87145E962C3D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TribesAscendDXTA</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>G:\imgui-1.69\examples;G:\imgui-1.69;G:\TA_SDK_1.4\SDK_HEADERS;G:\TA_SDK_1.4;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>G:\imgui-1.69\examples;G:\imgui-1.69;G:\TA_SDK_1.4\SDK_HEADERS;G:\TA_SDK_1.4;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;TRIBESASCENDDXTA_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>false</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>G:\imgui-1.69;G:\imgui-1.69\examples;C:\Users\Admin\Documents\GitHub\UE_Utilities\UE_Utilities\UE_Utilities;C:\Users\Admin\Documents\GitHub\Hookerino\myHooks\myHooks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;TRIBESASCENDDXTA_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;TRIBESASCENDDXTA_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>G:\imgui-1.69;G:\imgui-1.69\examples;C:\Users\Admin\Documents\GitHub\UE_Utilities\UE_Utilities\UE_Utilities;C:\Users\Admin\Documents\GitHub\Hookerino\myHooks\myHooks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DebugInformationFormat>None</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>false</OptimizeReferences>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;TRIBESASCENDDXTA_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\FullJumpHook3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\Hook.cpp" />
+    <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\JumpHook.cpp" />
+    <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\Memory.cpp" />
+    <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\VMTHook.cpp" />
+    <ClCompile Include="..\..\..\UE_Utilities\UE_Utilities\UE_Utilities\Keys.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\UE_Utilities\UE_Utilities\UE_Utilities\Menu.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\..\UE_Utilities\UE_Utilities\UE_Utilities\UEHook.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="DX.cpp" />
+    <ClCompile Include="G:\imgui-1.69\examples\imgui_impl_dx9.cpp" />
+    <ClCompile Include="G:\imgui-1.69\examples\imgui_impl_win32.cpp" />
+    <ClCompile Include="G:\imgui-1.69\imgui.cpp" />
+    <ClCompile Include="G:\imgui-1.69\imgui_demo.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="G:\imgui-1.69\imgui_draw.cpp" />
+    <ClCompile Include="G:\imgui-1.69\imgui_widgets.cpp" />
+    <ClCompile Include="main.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\Hookerino\myHooks\myHooks\Hook.h" />
+    <ClInclude Include="..\..\..\Hookerino\myHooks\myHooks\Memory.h" />
+    <ClInclude Include="..\..\..\UE_Utilities\UE_Utilities\UE_Utilities\Keys.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\UE_Utilities\UE_Utilities\UE_Utilities\Menu.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="..\..\..\UE_Utilities\UE_Utilities\UE_Utilities\UEHook.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="DX.h" />
+    <ClInclude Include="G:\imgui-1.69\examples\imgui_impl_dx9.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="G:\imgui-1.69\examples\imgui_impl_win32.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="G:\imgui-1.69\imconfig.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="G:\imgui-1.69\imgui.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="G:\imgui-1.69\imgui_internal.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="G:\imgui-1.69\imstb_rectpack.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="G:\imgui-1.69\imstb_textedit.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="G:\imgui-1.69\imstb_truetype.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\Core_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\Core_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\Core_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\Core_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\Engine_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\Engine_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\Engine_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\Engine_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\GameFramework_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\GameFramework_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\GameFramework_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\GameFramework_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\GFxUI_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\GFxUI_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\GFxUI_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\GFxUI_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\IpDrv_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\IpDrv_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\IpDrv_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\IpDrv_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\OnlineSubsystemMcts_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\OnlineSubsystemMcts_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\OnlineSubsystemMcts_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\OnlineSubsystemMcts_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\PlatformCommon_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\PlatformCommon_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\PlatformCommon_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\PlatformCommon_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\TribesGameContent_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\TribesGameContent_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\TribesGameContent_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\TribesGameContent_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\TribesGame_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\TribesGame_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\TribesGame_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\TribesGame_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\UDKBase_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\UDKBase_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\UDKBase_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\UDKBase_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\UTGame_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\UTGame_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\UTGame_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\UTGame_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\WinDrv_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\WinDrv_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\WinDrv_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\WinDrv_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\XAudio2_classes.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\XAudio2_functions.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\XAudio2_f_structs.h" />
+    <ClInclude Include="G:\Tribes Ascend\TA SDK 1.4\SDK_HEADERS\XAudio2_structs.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
