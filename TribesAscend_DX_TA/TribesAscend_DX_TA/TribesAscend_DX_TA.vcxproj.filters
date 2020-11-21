@@ -40,6 +40,15 @@
     <Filter Include="Header Files\SDK">
       <UniqueIdentifier>{1008cf7a-959c-4a63-9af7-8f7b2c8cda5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\UsefulSnippets">
+      <UniqueIdentifier>{8b67c059-eaf3-4742-9e62-3094ef9874db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\UsefulSnippets">
+      <UniqueIdentifier>{18ef241a-08a3-4c8a-8c00-eb84bf57b263}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\TextureManager">
+      <UniqueIdentifier>{6f4a3618-2568-42b9-8323-8a27738c960b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\JumpHook.cpp">
@@ -95,6 +104,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\FullJumpHook3.cpp">
       <Filter>Resource Files\Hookerino</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\source\repos\UsefulSnippets\Files.cpp">
+      <Filter>Resource Files\UsefulSnippets</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomTextureManager.cpp">
+      <Filter>Source Files\TextureManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +316,12 @@
     </ClInclude>
     <ClInclude Include="DXCanvas.h">
       <Filter>Header Files\DX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\source\repos\UsefulSnippets\Files.h">
+      <Filter>Header Files\UsefulSnippets</Filter>
+    </ClInclude>
+    <ClInclude Include="CustomTextureManager.h">
+      <Filter>Source Files\TextureManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

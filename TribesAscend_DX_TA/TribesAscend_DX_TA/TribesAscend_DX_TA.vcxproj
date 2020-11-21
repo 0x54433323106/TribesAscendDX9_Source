@@ -30,7 +30,7 @@
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
@@ -95,7 +95,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;TRIBESASCENDDXTA_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>false</ConformanceMode>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>G:\imgui-1.69;G:\imgui-1.69\examples;C:\Users\Admin\Documents\GitHub\UE_Utilities\UE_Utilities\UE_Utilities;C:\Users\Admin\Documents\GitHub\Hookerino\myHooks\myHooks;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>G:\imgui-1.69;G:\imgui-1.69\examples;C:\Users\Admin\Documents\GitHub\UE_Utilities\UE_Utilities\UE_Utilities;C:\Users\Admin\Documents\GitHub\Hookerino\myHooks\myHooks;C:\Users\KB\source\repos\UsefulSnippets;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -105,7 +105,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
@@ -162,6 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\source\repos\UsefulSnippets\Files.cpp" />
     <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\FullJumpHook3.cpp" />
     <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\Hook.cpp" />
     <ClCompile Include="..\..\..\Hookerino\myHooks\myHooks\JumpHook.cpp" />
@@ -179,6 +180,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="CustomTextureManager.cpp" />
     <ClCompile Include="DX.cpp" />
     <ClCompile Include="DXCanvas.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -201,6 +203,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\source\repos\UsefulSnippets\Files.h" />
     <ClInclude Include="..\..\..\Hookerino\myHooks\myHooks\Hook.h" />
     <ClInclude Include="..\..\..\Hookerino\myHooks\myHooks\Memory.h" />
     <ClInclude Include="..\..\..\UE_Utilities\UE_Utilities\UE_Utilities\Keys.h">
@@ -215,6 +218,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="CustomTextureManager.h" />
     <ClInclude Include="DX.h" />
     <ClInclude Include="DXCanvas.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
